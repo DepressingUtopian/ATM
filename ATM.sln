@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM", "ATM.csproj", "{7D7B5F5B-F232-4761-BC15-130E83E9500D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTest_ATM", "..\NUnitTest_ATM\NUnitTest_ATM.csproj", "{58E46281-1CAD-4949-9911-A7B4F207B825}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D7B5F5B-F232-4761-BC15-130E83E9500D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7B5F5B-F232-4761-BC15-130E83E9500D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7B5F5B-F232-4761-BC15-130E83E9500D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7B5F5B-F232-4761-BC15-130E83E9500D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58E46281-1CAD-4949-9911-A7B4F207B825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E46281-1CAD-4949-9911-A7B4F207B825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E46281-1CAD-4949-9911-A7B4F207B825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E46281-1CAD-4949-9911-A7B4F207B825}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F63A7743-81FD-412A-A9D9-736DAD7A77C8}
+	EndGlobalSection
+EndGlobal
