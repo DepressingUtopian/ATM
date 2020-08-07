@@ -1,0 +1,19 @@
+﻿<Page x:Class="ATM.View.ChoicePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ATM.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="80" d:DesignWidth="200"
+      Title="ChoicePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Content="Снять деньги" Grid.Row="0" Margin="5"/>
+        <Button Content="Внести деньги" Grid.Row="1"  Margin="5"/>
+    </Grid>
+</Page>

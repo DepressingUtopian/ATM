@@ -55,7 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="View\ChoicePage.xaml.cs">
+      <DependentUpon>ChoicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\ChoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,11 +73,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ATMCore.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Model\ATMCore.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,6 +108,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\500.png" />
+    <Resource Include="Assets\10.png" />
+    <Content Include="Assets\10.svg" />
+    <Resource Include="Assets\100.png" />
+    <Content Include="Assets\100.svg" />
+    <Resource Include="Assets\1000.png" />
+    <Content Include="Assets\1000.svg" />
+    <Resource Include="Assets\200.png" />
+    <Content Include="Assets\200.svg" />
+    <Resource Include="Assets\2000.png" />
+    <Content Include="Assets\2000.svg" />
+    <Resource Include="Assets\50.png" />
+    <Content Include="Assets\50.svg" />
+    <Resource Include="Assets\5000.png" />
+    <Content Include="Assets\5000.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
