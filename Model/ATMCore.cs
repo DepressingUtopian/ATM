@@ -56,7 +56,7 @@ namespace ATM
         public void PickUpMoney(int amountToIssue)
         {
             int[,] decisionMatrix;
-            List<int> solution;
+            Dictionary<int,int> solution;
 
             ProcessingPickUp(amountToIssue, out decisionMatrix);
             SearchSolution(decisionMatrix, amountToIssue, out solution);
@@ -99,13 +99,13 @@ namespace ATM
             }  
         }
 
-        public bool SearchSolution(int[,] decisionMatrix, int amountToIssue,out List<int> solution)
+        public bool SearchSolution(int[,] decisionMatrix, int amountToIssue,out Dictionary<int,int> solution)
         {
             int idx = 0;
             int k = atm_storage.Keys.Count;
             List<int> passedDenominationsIdx = new List<int>();
             List<int> denominations = atm_storage.Keys.ToList<int>();
-            solution = new List<int>();
+            solution = new Dictionary<int, int>();
             while (amountToIssue != 0)
             {
                 if (passedDenominationsIdx.Count == k)
@@ -133,9 +133,8 @@ namespace ATM
                     return false;
                 else
                 {
-                    amountToIssue -= decisionMatrix[minCountIdx, idx] * denominations[minCountIdx];
-                    for (int t = 0; t < decisionMatrix[minCountIdx, idx]; t++)
-                        solution.Add(denominations[minCountIdx]);
+                    amountToIssue -= decisionMatrix[minCountIdx, idx] * denominations[minCountIdx];              
+                    AddSolution(ref solution, denominations[minCountIdx], decisionMatrix[minCountIdx, idx]);
 
                 }
 
@@ -143,6 +142,14 @@ namespace ATM
             }
 
             return true;
+        }
+
+        private void AddSolution(ref Dictionary<int,int> solution, int new_banknote, int count)
+        {
+            if (solution.ContainsKey(new_banknote))
+                solution[new_banknote]+= count;
+            else
+                solution.Add(new_banknote, count);
         }
     }
 }
