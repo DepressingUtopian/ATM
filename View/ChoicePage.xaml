@@ -13,7 +13,7 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Content="Снять деньги" Grid.Row="0" Margin="5"/>
-        <Button Content="Внести деньги" Grid.Row="1"  Margin="5"/>
+        <Button Content="Снять деньги" Command="{Binding GetMoneyOpenPageCommand}" Grid.Row="0" Margin="5"/>
+        <Button Content="Внести деньги" Command="{Binding AddMoneyOpenPageCommand}"  Grid.Row="1"  Margin="5"/>
     </Grid>
 </Page>

@@ -1,5 +1,4 @@
-﻿using ATM.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,17 +16,13 @@ using System.Windows.Shapes;
 namespace ATM.View
 {
     /// <summary>
-    /// Логика взаимодействия для ChoicePage.xaml
+    /// Логика взаимодействия для GetMoneyPage.xaml
     /// </summary>
-    public partial class ChoicePage : Page
+    public partial class GetMoneyPage : Page
     {
-        public ChoicePage()
+        public GetMoneyPage()
         {
             InitializeComponent();
-            MainViewModel.ViewModelMediator.ChoiceViewModel = new ChoiceViewModel();
-            MainViewModel.ViewModelMediator.ChoiceViewModel.SetMediator(MainViewModel.ViewModelMediator);
-
-            DataContext = MainViewModel.ViewModelMediator.ChoiceViewModel;
         }
     }
 }

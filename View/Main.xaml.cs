@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ATM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,16 @@ namespace ATM.View
     /// <summary>
     /// Логика взаимодействия для PageChoice.xaml
     /// </summary>
-    public partial class PageChoice : Page
+    public partial class Main : Page
     {
-        public PageChoice()
+        public Main()
         {
             InitializeComponent();
+
+            MainViewModel.ViewModelMediator.ATMViewModel = new ATMViewModel();
+            MainViewModel.ViewModelMediator.ATMViewModel.SetMediator(MainViewModel.ViewModelMediator);
+
+            DataContext = MainViewModel.ViewModelMediator.ATMViewModel;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Page x:Class="ATM.View.PageChoice"
+﻿<Page x:Class="ATM.View.Main"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -46,10 +46,10 @@
             </StackPanel>
         </Grid>
         <TextBlock Text="Баланс" Foreground="Red" FontSize="18"  Grid.RowSpan="2" Margin="30,0,0,0"></TextBlock>
-        <TextBlock Text="0" Foreground="Red" FontSize="18"  Grid.RowSpan="2" Margin="100,0,0,0"></TextBlock>
+        <TextBlock Text="{Binding ATM_CoreAmountOfBanknotes}" Foreground="Red" FontSize="18"  Grid.RowSpan="2" Margin="100,0,0,0"></TextBlock>
         <TextBlock Text="Вместимость" Foreground="Red" FontSize="18"  Grid.RowSpan="2" Margin="120,0,0,0"></TextBlock>
-        <TextBlock Text="0" Foreground="Red" FontSize="18"  Grid.RowSpan="2" Margin="240,0,0,0"></TextBlock>
-        <Frame Grid.Row="1" Source="ChoicePage.xaml" Grid.ColumnSpan="2"></Frame>
+        <TextBlock Text="{Binding ATM_CoreCapacity}" Foreground="Red" FontSize="18"  Grid.RowSpan="2" Margin="240,0,0,0"></TextBlock>
+        <Frame Grid.Row="1" Content="{Binding CurrentPage}" Grid.ColumnSpan="2"></Frame>
         
 
     </Grid>

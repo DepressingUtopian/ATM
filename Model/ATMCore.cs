@@ -1,17 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ATM
 {
-    public class ATMCore
+    public class ATMCore : INotifyPropertyChanged
     {
         private Dictionary<int, int> atm_storage = new Dictionary<int, int>();
         private const int minNominal = 10;
         private int capacity = 0;
+        private int amountOfBanknotes = 0;
+        private int countOfBanknotes = 0;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public int Capacity
+        {
+            get { return capacity; }
+            set
+            {
+                capacity = value;
+                OnPropertyChanged("Capacity");
+            }
+        }
+
+        public int AmountOfBanknotes
+        {
+            get { return amountOfBanknotes; }
+            set
+            {
+                amountOfBanknotes = value;
+                OnPropertyChanged("AmountOfBanknotes");
+            }
+        }
+
+        public int GetBacknotesCount(int nominal)
+        {
+            if (atm_storage.ContainsKey(nominal))
+                return atm_storage[nominal];
+            else
+                return 0;
+        }
+
+        public bool SetBacknotesCount(int nominal, int count)
+        {
+            if (atm_storage.ContainsKey(nominal))
+            {
+                atm_storage[nominal] = count;
+                return true;
+            }
+            else
+                return false;
+        }
+        public int CountOfBanknotes
+        {
+            get { return countOfBanknotes; }
+            set
+            {
+                countOfBanknotes = value;
+                OnPropertyChanged("CountOfBanknotes");
+            }
+        }
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+        
         ATMCore(Dictionary<int, int> atm_storage)
         {
             this.atm_storage = atm_storage;
@@ -31,6 +90,9 @@ namespace ATM
                 atm_storage[value] += count;
             else
                 atm_storage.Add(value,count);
+
+            countOfBanknotes += count;
+            amountOfBanknotes += count * value;
         }
 
         public bool PickUpMoney(int value, int count = 1)
@@ -45,9 +107,10 @@ namespace ATM
                 if (atm_storage[value] >= count)
                 {
                     atm_storage[value] -= count;
+                    countOfBanknotes -= count;
+                    amountOfBanknotes -= count * value;
                     return true;
-                }
-                
+                }          
             }
  
             throw new Exception("Банкомат не может выдать данную сумму!");
@@ -60,6 +123,7 @@ namespace ATM
 
             ProcessingPickUp(amountToIssue, out decisionMatrix);
             SearchSolution(decisionMatrix, amountToIssue, out solution);
+            IssuanceProcess(solution);
 
         }
 
@@ -150,6 +214,13 @@ namespace ATM
                 solution[new_banknote]+= count;
             else
                 solution.Add(new_banknote, count);
+        }
+
+        public void IssuanceProcess(Dictionary<int, int> solution)
+        {
+            foreach (KeyValuePair<int,int> banknotes in solution)
+                PickUpMoney(banknotes.Key, banknotes.Value);
+            
         }
     }
 }

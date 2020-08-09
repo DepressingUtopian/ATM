@@ -16,7 +16,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Frame Source="Main.xaml" Grid.Row ="0" Margin="5">
+            <Frame Content="{Binding CurrentPage}" Grid.Row ="0" Margin="5">
             </Frame>
         </Grid>
 
@@ -34,7 +34,7 @@
                 <RowDefinition Height="40*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Content="0" Grid.Column ="0" Grid.Row="0"/>
+            <Button Content="0" Command="{Binding AddMoneyOpenPageCommand}" Grid.Column ="0" Grid.Row="0"/>
             <Button Content="1" Grid.Column ="1" Grid.Row="0"/>
             <Button Content="2" Grid.Column ="2" Grid.Row="0"/>
             <Button Content="3" Grid.Column ="0" Grid.Row="1"/>
