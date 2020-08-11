@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseComponent.cs" />
+    <Compile Include="ViewModel\GetMoneyViewModel.cs" />
     <Compile Include="ViewModelMediator.cs" />
     <Compile Include="IPageFactory.cs" />
     <Compile Include="IMediator.cs" />

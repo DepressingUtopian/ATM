@@ -75,7 +75,7 @@ namespace ATM.ViewModel
 
         public ATMViewModel()
         {
-            core = new ATMCore(10);
+            core = new ATMCore(100);
             addMoneyView = pageFactory.AddMoneyPage();
             getMoneyView = pageFactory.GetMoneyPage();
             choiceView = pageFactory.ChoicePage();
@@ -99,6 +99,15 @@ namespace ATM.ViewModel
         {
             core.AddMoney(nominal, count);
             OnPropertyChanged("ATM_CoreAmountOfBanknotes");
+            OnPropertyChanged("Storage");
+        }
+
+        public void PickUpBanknotes(int amount)
+        {
+            core.PickUpMoney(amount);
+            OnPropertyChanged("ATM_CoreAmountOfBanknotes");
+            OnPropertyChanged("CountOfBanknotes");
+            OnPropertyChanged("Storage");
         }
     }
 }

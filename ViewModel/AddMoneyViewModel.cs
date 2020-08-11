@@ -16,6 +16,7 @@ namespace ATM.ViewModel
         private RelayCommand addMoneyCommand;
         private RelayCommand pickModeyCommand;
         private RelayCommand goMoneyToATMCommand;
+        private RelayCommand goChoicePage;
         private int countBanknotesInATM = 0;
         private int sumBanknotesValue = 0;
         private int countAddBanknotes = 0;
@@ -56,6 +57,7 @@ namespace ATM.ViewModel
                   {
                       int nominal = int.Parse(obj as String);
                       Pick(nominal);
+                      SumBanknotesValue -= nominal;
                       OnPropertyChanged("AddBanknotes");
                   }
                   , (obj) => (AddBanknotes[int.Parse(obj as String)] > 0)
@@ -76,6 +78,22 @@ namespace ATM.ViewModel
                   }
                   , (obj) => (countAddBanknotes > 0)
               )
+
+            );
+            }
+        }
+
+        public RelayCommand GoChoicePage
+        {
+            get
+            {
+                return goChoicePage ??
+                (
+                  goChoicePage = new RelayCommand(obj =>
+                  {
+                      this._mediator.Notify(this, "go_ChoicePage");
+                  }
+                )
 
             );
             }

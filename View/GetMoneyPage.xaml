@@ -26,17 +26,17 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="0" Grid.Row="0" Content="10" FontSize="10"></Button>
-            <Button Grid.Column="1" Grid.Row="0" Content="50" FontSize="10"></Button>
-            <Button Grid.Column="2" Grid.Row="0" Content="100" FontSize="10"></Button>
-            <Button Grid.Column="0" Grid.Row="1" Content="200" FontSize="10"></Button>
-            <Button Grid.Column="1" Grid.Row="1" Content="1000" FontSize="10"></Button>
-            <Button Grid.Column="2" Grid.Row="1" Content="2000" FontSize="10"></Button>
-            <Button Grid.Column="0" Grid.Row="2" Content="5000" FontSize="10"></Button>
+            <Button Command="{Binding NominalClickButton}" CommandParameter="10" Grid.Column="0" Grid.Row="0" Content="10" FontSize="10"></Button>
+            <Button Command="{Binding NominalClickButton}" CommandParameter="50" Grid.Column="1" Grid.Row="0" Content="50" FontSize="10"></Button>
+            <Button Command="{Binding NominalClickButton}" CommandParameter="100" Grid.Column="2" Grid.Row="0" Content="100" FontSize="10"></Button>
+            <Button Command="{Binding NominalClickButton}" CommandParameter="200" Grid.Column="0" Grid.Row="1" Content="200" FontSize="10"></Button>
+            <Button Command="{Binding NominalClickButton}" CommandParameter="1000" Grid.Column="1" Grid.Row="1" Content="1000" FontSize="10"></Button>
+            <Button Command="{Binding NominalClickButton}" CommandParameter="2000" Grid.Column="2" Grid.Row="1" Content="2000" FontSize="10"></Button>
+            <Button Command="{Binding NominalClickButton}" CommandParameter="5000" Grid.Column="0" Grid.Row="2" Content="5000" FontSize="10"></Button>
         </Grid>
 
-        <Button Grid.Row="1" Content="Назад" FontSize="10" Width="100" HorizontalAlignment="Left"></Button>
-        <TextBox Width="140" Grid.Row="1" HorizontalAlignment="Center"/>
-        <Button Grid.Column="0" Content="Снять" Grid.Row="2" FontSize="10" Width="100" HorizontalAlignment="Right"></Button>
+        <Button Command="{Binding GoChoicePage}" Grid.Row="1" Content="Назад" FontSize="10" Width="100" HorizontalAlignment="Left"></Button>
+        <TextBox Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="140" Grid.Row="1" HorizontalAlignment="Center"/>
+        <Button Command="{Binding PickupClickButton}" Grid.Column="0" Content="Снять" Grid.Row="2" FontSize="10" Width="100" HorizontalAlignment="Right"></Button>
     </Grid>
 </Page>

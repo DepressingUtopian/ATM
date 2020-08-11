@@ -14,21 +14,25 @@ namespace ATM
         private ATMViewModel atmViewModel;
         private ChoiceViewModel choiceViewModel;
         private AddMoneyViewModel addMoneyViewModel;
+        private GetMoneyViewModel getMoneyViewModel;
 
         public ViewModelMediator()
         {
         }
 
-        public ViewModelMediator(ATMViewModel atmViewModel, ChoiceViewModel choiceViewModel, AddMoneyViewModel addMoneyViewModel)
+        public ViewModelMediator(ATMViewModel atmViewModel, ChoiceViewModel choiceViewModel, 
+            AddMoneyViewModel addMoneyViewModel, GetMoneyViewModel getMoneyViewModel)
         {
             this.atmViewModel = atmViewModel;
             this.choiceViewModel = choiceViewModel;
             this.addMoneyViewModel = addMoneyViewModel;
+            this.GetMoneyViewModel = getMoneyViewModel;
         }
 
         public ChoiceViewModel ChoiceViewModel { get => choiceViewModel; set => choiceViewModel = value; }
         public ATMViewModel ATMViewModel { get => atmViewModel; set => atmViewModel = value; }
         public AddMoneyViewModel AddMoneyViewModel { get => addMoneyViewModel; set => addMoneyViewModel = value; }
+        public GetMoneyViewModel GetMoneyViewModel { get => getMoneyViewModel; set => getMoneyViewModel = value; }
 
         public void Notify(object sender, string _event)
         {
@@ -39,6 +43,7 @@ namespace ATM
                 if (_event == "update_main_frame_getPage")
                     ATMViewModel.SetGetMoneyViewCurrent();
             }
+
             if (sender is AddMoneyViewModel)
             {
                 if (_event == "update_count_backnotes_info")
@@ -48,12 +53,24 @@ namespace ATM
                 if (_event == "go_money_atm")
                 {
                     foreach (KeyValuePair<int, int> banknote in (sender as AddMoneyViewModel).AddBanknotes)
-                    {
                         ATMViewModel.AddBanknotes(banknote.Key, banknote.Value);
-                    } 
+                    ATMViewModel.SetChoiceViewCurrent();
+                    
                 }
             }
-            
+
+            if (sender is GetMoneyViewModel)
+            {
+                if (_event == "pickup_banknotes")
+                {
+                    ATMViewModel.PickUpBanknotes((sender as GetMoneyViewModel).Amount);
+                }
+            }
+
+            if(_event == "go_ChoicePage")
+                ATMViewModel.SetChoiceViewCurrent();
+
+
         }
     }
 }
