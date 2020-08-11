@@ -20,7 +20,6 @@ namespace ATM.ViewModel
         {
             get
             {
-                Debug.WriteLine("Test");
                 return addMoneyOpenPageCommand ??
                 (
                     addMoneyOpenPageCommand = new RelayCommand(obj =>

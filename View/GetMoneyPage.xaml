@@ -5,16 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ATM.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="200" d:DesignWidth="360"
       Title="GetMoneyPage">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.8*"></RowDefinition>
-            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Margin="40" Grid.Row="0">
+        <Grid Margin="10" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -25,18 +25,18 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            
-            <Button Grid.Column="0" Grid.Row="0" Content="10" FontSize="20"></Button>
-            <Button Grid.Column="1" Grid.Row="0" Content="50" FontSize="20"></Button>
-            <Button Grid.Column="2" Grid.Row="0" Content="100" FontSize="20"></Button>
-            <Button Grid.Column="0" Grid.Row="1" Content="200" FontSize="20"></Button>
-            <Button Grid.Column="1" Grid.Row="1" Content="1000" FontSize="20"></Button>
-            <Button Grid.Column="2" Grid.Row="1" Content="2000" FontSize="20"></Button>
-            <Button Grid.Column="0" Grid.Row="2" Content="5000" FontSize="20"></Button>
+
+            <Button Grid.Column="0" Grid.Row="0" Content="10" FontSize="10"></Button>
+            <Button Grid.Column="1" Grid.Row="0" Content="50" FontSize="10"></Button>
+            <Button Grid.Column="2" Grid.Row="0" Content="100" FontSize="10"></Button>
+            <Button Grid.Column="0" Grid.Row="1" Content="200" FontSize="10"></Button>
+            <Button Grid.Column="1" Grid.Row="1" Content="1000" FontSize="10"></Button>
+            <Button Grid.Column="2" Grid.Row="1" Content="2000" FontSize="10"></Button>
+            <Button Grid.Column="0" Grid.Row="2" Content="5000" FontSize="10"></Button>
         </Grid>
 
-        <Button Grid.Row="1" Content="Назад" FontSize="20" Width="200" HorizontalAlignment="Left"></Button>
-        <TextBox Grid.Row="1" Width="260" Height="60" Margin="335,20,205,10"></TextBox>
-        <Button Grid.Column="0" Content="Снять" Grid.Row="2" FontSize="20" Width="200" HorizontalAlignment="Right"></Button>
+        <Button Grid.Row="1" Content="Назад" FontSize="10" Width="100" HorizontalAlignment="Left"></Button>
+        <TextBox Width="140" Grid.Row="1" HorizontalAlignment="Center"/>
+        <Button Grid.Column="0" Content="Снять" Grid.Row="2" FontSize="10" Width="100" HorizontalAlignment="Right"></Button>
     </Grid>
 </Page>

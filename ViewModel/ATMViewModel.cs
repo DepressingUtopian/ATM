@@ -30,6 +30,10 @@ namespace ATM.ViewModel
             }
         }
 
+        public int CountOfBanknotes
+        {
+            get { return core.CountOfBanknotes; }
+        }
         public int ATM_CoreCapacity
         {
             get { return core.Capacity; }
@@ -48,6 +52,18 @@ namespace ATM.ViewModel
             }
         }
 
+        public Dictionary<int, int> Storage
+        {
+            get 
+            {
+                return core.Storage;
+            }
+            set
+            {
+                core.Storage = value;
+                OnPropertyChanged("Storage");
+            }
+        }
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -77,6 +93,12 @@ namespace ATM.ViewModel
         public void SetChoiceViewCurrent()
         {
             CurrentPage = choiceView;
+        }
+
+        public void AddBanknotes(int nominal, int count)
+        {
+            core.AddMoney(nominal, count);
+            OnPropertyChanged("ATM_CoreAmountOfBanknotes");
         }
     }
 }

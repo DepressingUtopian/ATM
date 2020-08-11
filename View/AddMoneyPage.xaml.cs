@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ATM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,10 @@ namespace ATM.View
     {
         public AddMoneyPage()
         {
-            InitializeComponent();
+           InitializeComponent();
+           MainViewModel.ViewModelMediator.AddMoneyViewModel = new AddMoneyViewModel();
+           MainViewModel.ViewModelMediator.AddMoneyViewModel.SetMediator(MainViewModel.ViewModelMediator);
+           DataContext = MainViewModel.ViewModelMediator.AddMoneyViewModel;
         }
     }
 }

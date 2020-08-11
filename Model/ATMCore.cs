@@ -10,7 +10,8 @@ namespace ATM
 {
     public class ATMCore : INotifyPropertyChanged
     {
-        private Dictionary<int, int> atm_storage = new Dictionary<int, int>();
+        private Dictionary<int, int> atm_storage = new Dictionary<int, int>() { {10, 0}, { 50, 0}, { 100, 0 },
+                        { 200, 0 }, { 500, 0 }, { 1000, 0 }, { 2000, 0 }, { 5000, 0 } };
         private const int minNominal = 10;
         private int capacity = 0;
         private int amountOfBanknotes = 0;
@@ -40,17 +41,17 @@ namespace ATM
 
         public int GetBacknotesCount(int nominal)
         {
-            if (atm_storage.ContainsKey(nominal))
-                return atm_storage[nominal];
+            if (Storage.ContainsKey(nominal))
+                return Storage[nominal];
             else
                 return 0;
         }
 
         public bool SetBacknotesCount(int nominal, int count)
         {
-            if (atm_storage.ContainsKey(nominal))
+            if (Storage.ContainsKey(nominal))
             {
-                atm_storage[nominal] = count;
+                Storage[nominal] = count;
                 return true;
             }
             else
@@ -65,6 +66,9 @@ namespace ATM
                 OnPropertyChanged("CountOfBanknotes");
             }
         }
+
+        public Dictionary<int, int> Storage { get => atm_storage; set => atm_storage = value; }
+
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
@@ -73,7 +77,7 @@ namespace ATM
         
         ATMCore(Dictionary<int, int> atm_storage)
         {
-            this.atm_storage = atm_storage;
+            this.Storage = atm_storage;
         }
 
         public ATMCore(int capacity)
@@ -83,13 +87,13 @@ namespace ATM
 
         public void AddMoney(int value, int count = 1)
         {
-            if (atm_storage.Count >= capacity)
+            if (Storage.Count >= capacity)
                 throw new Exception("Банкомат полон!");
 
-            if (atm_storage.ContainsKey(value))
-                atm_storage[value] += count;
+            if (Storage.ContainsKey(value))
+                Storage[value] += count;
             else
-                atm_storage.Add(value,count);
+                Storage.Add(value,count);
 
             countOfBanknotes += count;
             amountOfBanknotes += count * value;
@@ -99,14 +103,14 @@ namespace ATM
         {
             if(count <= 0)
                 return false;
-            if(atm_storage.Count == 0)
+            if(Storage.Count == 0)
                 throw new Exception("Банкомат пуст!");
 
-            if (atm_storage.ContainsKey(value))
+            if (Storage.ContainsKey(value))
             {
-                if (atm_storage[value] >= count)
+                if (Storage[value] >= count)
                 {
-                    atm_storage[value] -= count;
+                    Storage[value] -= count;
                     countOfBanknotes -= count;
                     amountOfBanknotes -= count * value;
                     return true;
@@ -129,12 +133,12 @@ namespace ATM
 
         public void ProcessingPickUp(int amountToIssue, out int[,] decisionMatrix)
         {
-            int max_value = atm_storage.Values.Max();
+            int max_value = Storage.Values.Max();
             int size = (int)(amountToIssue / minNominal);
             if (size <= 0)
                 throw new Exception("Запращиваемая сумма не может быть отрицательной!");
-            decisionMatrix = new int[atm_storage.Keys.Count, size];
-            List<int> denominations = atm_storage.Keys.ToList<int>();
+            decisionMatrix = new int[Storage.Keys.Count, size];
+            List<int> denominations = Storage.Keys.ToList<int>();
             int local_sum = 0;
 
             for(int i = 0; i < denominations.Count;i++)
@@ -145,7 +149,7 @@ namespace ATM
                     if (local_sum <= amountToIssue && local_sum >= denominations[i])
                     {
                         int quantityForIssue = (int)(local_sum / denominations[i]);
-                        if (quantityForIssue > 0 && atm_storage[denominations[i]] >= quantityForIssue)
+                        if (quantityForIssue > 0 && Storage[denominations[i]] >= quantityForIssue)
                             decisionMatrix[i, j] = quantityForIssue;
                         else
                             decisionMatrix[i, j] = -1;
@@ -166,9 +170,9 @@ namespace ATM
         public bool SearchSolution(int[,] decisionMatrix, int amountToIssue,out Dictionary<int,int> solution)
         {
             int idx = 0;
-            int k = atm_storage.Keys.Count;
+            int k = Storage.Keys.Count;
             List<int> passedDenominationsIdx = new List<int>();
-            List<int> denominations = atm_storage.Keys.ToList<int>();
+            List<int> denominations = Storage.Keys.ToList<int>();
             solution = new Dictionary<int, int>();
             while (amountToIssue != 0)
             {

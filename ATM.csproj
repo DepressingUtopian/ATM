@@ -61,6 +61,7 @@
     <Compile Include="IMediator.cs" />
     <Compile Include="PageFactory.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModel\AddMoneyViewModel.cs" />
     <Compile Include="ViewModel\ATMViewModel.cs" />
     <Compile Include="ViewModel\ChoiceViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
