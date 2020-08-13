@@ -142,23 +142,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Assets\500.png" />
     <Resource Include="Assets\10.png" />
-    <Content Include="Assets\10.svg" />
     <Resource Include="Assets\100.png" />
-    <Content Include="Assets\100.svg" />
     <Resource Include="Assets\1000.png" />
-    <Content Include="Assets\1000.svg" />
     <Resource Include="Assets\200.png" />
-    <Content Include="Assets\200.svg" />
     <Resource Include="Assets\2000.png" />
-    <Content Include="Assets\2000.svg" />
     <Resource Include="Assets\50.png" />
-    <Content Include="Assets\50.svg" />
+    <Resource Include="Assets\500.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Assets\5000.png" />
-    <Content Include="Assets\5000.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
