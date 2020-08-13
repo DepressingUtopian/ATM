@@ -15,24 +15,26 @@ namespace ATM
         private ChoiceViewModel choiceViewModel;
         private AddMoneyViewModel addMoneyViewModel;
         private GetMoneyViewModel getMoneyViewModel;
-
+        private PickUpViewModel pickUpViewModel;
         public ViewModelMediator()
         {
         }
 
         public ViewModelMediator(ATMViewModel atmViewModel, ChoiceViewModel choiceViewModel, 
-            AddMoneyViewModel addMoneyViewModel, GetMoneyViewModel getMoneyViewModel)
+            AddMoneyViewModel addMoneyViewModel, GetMoneyViewModel getMoneyViewModel, PickUpViewModel pickUpViewModel)
         {
             this.atmViewModel = atmViewModel;
             this.choiceViewModel = choiceViewModel;
             this.addMoneyViewModel = addMoneyViewModel;
-            this.GetMoneyViewModel = getMoneyViewModel;
+            this.getMoneyViewModel = getMoneyViewModel;
+            this.PickUpViewModel = pickUpViewModel;
         }
 
         public ChoiceViewModel ChoiceViewModel { get => choiceViewModel; set => choiceViewModel = value; }
         public ATMViewModel ATMViewModel { get => atmViewModel; set => atmViewModel = value; }
         public AddMoneyViewModel AddMoneyViewModel { get => addMoneyViewModel; set => addMoneyViewModel = value; }
         public GetMoneyViewModel GetMoneyViewModel { get => getMoneyViewModel; set => getMoneyViewModel = value; }
+        public PickUpViewModel PickUpViewModel { get => pickUpViewModel; set => pickUpViewModel = value; }
 
         public void Notify(object sender, string _event)
         {
@@ -63,14 +65,16 @@ namespace ATM
             {
                 if (_event == "pickup_banknotes")
                 {
-                    ATMViewModel.PickUpBanknotes((sender as GetMoneyViewModel).Amount);
+                    ATMViewModel.PickUpBanknotes((sender as GetMoneyViewModel).Amount, true);
                 }
+                if (_event == "show_money_solution")
+                    ATMViewModel.SetPickUpMoneyPageCurrent();
             }
 
-            if(_event == "go_ChoicePage")
+            if (_event == "go_ChoicePage")
+            {
                 ATMViewModel.SetChoiceViewCurrent();
-
-
+            }
         }
     }
 }

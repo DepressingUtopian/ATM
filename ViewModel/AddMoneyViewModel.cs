@@ -26,7 +26,8 @@ namespace ATM.ViewModel
             {
                 addBanknotes = value;
                 OnPropertyChanged("AddBanknotes");
-            } }
+            } 
+        }
 
         public RelayCommand AddMoneyCommand {
             get 
@@ -98,6 +99,7 @@ namespace ATM.ViewModel
             );
             }
         }
+
         public int CountBanknotesInATM { get => countBanknotesInATM; set => countBanknotesInATM = value; }
         public int SumBanknotesValue { get => sumBanknotesValue;
             set

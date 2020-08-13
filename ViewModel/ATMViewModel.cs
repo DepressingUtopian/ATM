@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ATM.View;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,7 +18,11 @@ namespace ATM.ViewModel
         private Page addMoneyView;
         private Page getMoneyView;
         private Page choiceView;
+        private Page pickUpMoneyPage;
+
         private PageFactory pageFactory = new PageFactory();
+        private Dictionary<int, int> lastSolution;
+
 
 
         public Page CurrentPage
@@ -79,6 +84,7 @@ namespace ATM.ViewModel
             addMoneyView = pageFactory.AddMoneyPage();
             getMoneyView = pageFactory.GetMoneyPage();
             choiceView = pageFactory.ChoicePage();
+            pickUpMoneyPage = pageFactory.PickUpMoneyPage();
             currentPage = choiceView;
         }
 
@@ -86,13 +92,21 @@ namespace ATM.ViewModel
         {
             CurrentPage = addMoneyView;
         }
+
         public void SetGetMoneyViewCurrent()
         {
             CurrentPage = getMoneyView;
         }
+
         public void SetChoiceViewCurrent()
         {
             CurrentPage = choiceView;
+        }
+
+        public void SetPickUpMoneyPageCurrent()
+        {
+            MainViewModel.ViewModelMediator.PickUpViewModel.PickMoney = lastSolution;
+            CurrentPage = pickUpMoneyPage;
         }
 
         public void AddBanknotes(int nominal, int count)
@@ -102,9 +116,17 @@ namespace ATM.ViewModel
             OnPropertyChanged("Storage");
         }
 
-        public void PickUpBanknotes(int amount)
+        public void PickUpBanknotes(int amount, bool showDialog = false)
         {
-            core.PickUpMoney(amount);
+            if (showDialog)
+            {
+                Dictionary<int, int> solution;
+                core.PickUpMoney(amount,out solution);
+                lastSolution = solution;
+            }
+            else
+                core.PickUpMoney(amount);
+
             OnPropertyChanged("ATM_CoreAmountOfBanknotes");
             OnPropertyChanged("CountOfBanknotes");
             OnPropertyChanged("Storage");

@@ -131,12 +131,20 @@ namespace ATM
 
         }
 
+        public void PickUpMoney(int amountToIssue, out Dictionary<int, int> solution)
+        {
+            int[,] decisionMatrix;
+            ProcessingPickUp(amountToIssue, out decisionMatrix);
+            SearchSolution(decisionMatrix, amountToIssue, out solution);
+            IssuanceProcess(solution);
+
+        }
         public void ProcessingPickUp(int amountToIssue, out int[,] decisionMatrix)
         {
             int max_value = Storage.Values.Max();
             int size = (int)(amountToIssue / minNominal);
             if (size <= 0)
-                throw new Exception("Запращиваемая сумма не может быть отрицательной!");
+                throw new Exception("Запращиваемая сумма не может быть отрицательной или равна 0!");
             decisionMatrix = new int[Storage.Keys.Count, size];
             List<int> denominations = Storage.Keys.ToList<int>();
             int local_sum = 0;

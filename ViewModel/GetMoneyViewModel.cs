@@ -45,7 +45,7 @@ namespace ATM
                     pickupClickButton = new RelayCommand(obj =>
                     {
                         this._mediator.Notify(this, "pickup_banknotes");
-                        this._mediator.Notify(this, "go_ChoicePage");
+                        this._mediator.Notify(this, "show_money_solution");
                         Amount = 0;
                     }
                 )

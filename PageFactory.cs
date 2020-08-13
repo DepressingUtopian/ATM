@@ -24,6 +24,11 @@ namespace ATM
             return new GetMoneyPage();
         }
 
+        public PickUpMoneyPage PickUpMoneyPage()
+        {
+            return new PickUpMoneyPage();
+        }
+
         public Main Main()
         {
             return new Main();

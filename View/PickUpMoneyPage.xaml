@@ -1,0 +1,29 @@
+﻿<Page x:Class="ATM.View.PickUpMoneyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ATM.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="120" d:DesignWidth="360"
+      Title="PickUpMoneyPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+            <TextBlock Text="Количество" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Text="{Binding PickMoney[10], Mode=TwoWay}" Margin="18,0,0,0"/>
+            <TextBlock Text="{Binding PickMoney[50], Mode=TwoWay}" Margin="28,0,0,0"></TextBlock>
+            <TextBlock Text="{Binding PickMoney[100], Mode=TwoWay}" Margin="28,0,0,0"></TextBlock>
+            <TextBlock Text="{Binding PickMoney[200], Mode=TwoWay}" Margin="28,0,0,0"></TextBlock>
+            <TextBlock Text="{Binding PickMoney[500], Mode=TwoWay}" Margin="28,0,0,0"></TextBlock>
+            <TextBlock Text="{Binding PickMoney[1000], Mode=TwoWay}" Margin="28,0,0,0"></TextBlock>
+            <TextBlock Text="{Binding PickMoney[2000], Mode=TwoWay}" Margin="28,0,0,0"></TextBlock>
+            <TextBlock Text="{Binding PickMoney[5000], Mode=TwoWay}" Margin="28,0,0,0"/>
+        </StackPanel>
+        <Button Command="{Binding GoChoicePage}" Grid.Row="1" Content="Закрыть"></Button>
+    </Grid>
+</Page>

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ATM.View"
       mc:Ignorable="d" 
-      d:DesignHeight="200" d:DesignWidth="360"
+      d:DesignHeight="130" d:DesignWidth="400"
       Title="GetMoneyPage">
 
     <Grid>
@@ -21,9 +21,9 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Button Command="{Binding NominalClickButton}" CommandParameter="10" Grid.Column="0" Grid.Row="0" Content="10" FontSize="10"></Button>
