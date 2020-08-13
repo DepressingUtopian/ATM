@@ -160,7 +160,7 @@ namespace ATM
                         if (quantityForIssue > 0 && Storage[denominations[i]] >= quantityForIssue)
                             decisionMatrix[i, j] = quantityForIssue;
                         else
-                            decisionMatrix[i, j] = -1;
+                            decisionMatrix[i, j] = decisionMatrix[i, j - 1];
                     }
                     else
                     {
@@ -182,7 +182,7 @@ namespace ATM
             List<int> passedDenominationsIdx = new List<int>();
             List<int> denominations = Storage.Keys.ToList<int>();
             solution = new Dictionary<int, int>();
-            while (amountToIssue != 0)
+            while (amountToIssue > 0)
             {
                 if (passedDenominationsIdx.Count == k)
                     return false;
@@ -194,11 +194,9 @@ namespace ATM
                 int minElem = Int32.MaxValue;
                 for (int i = 1; i < k; i++)
                 {
-                    if (passedDenominationsIdx.Contains(minCountIdx))
-                    {
-                        minCountIdx++;
+                    if (passedDenominationsIdx.Contains(i))
                         continue;
-                    }
+                    
                     if (minElem > decisionMatrix[i, idx] && decisionMatrix[i, idx] != -1)
                     {
                         minElem = decisionMatrix[i, idx];
