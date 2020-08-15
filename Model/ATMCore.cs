@@ -16,6 +16,7 @@ namespace ATM
         private int capacity = 0;
         private int amountOfBanknotes = 0;
         private int countOfBanknotes = 0;
+        private int remainingSpace = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -68,6 +69,13 @@ namespace ATM
         }
 
         public Dictionary<int, int> Storage { get => atm_storage; set => atm_storage = value; }
+        public int RemainingSpace { get => remainingSpace;
+            set
+            {
+                remainingSpace = value;
+                OnPropertyChanged("RemainingSpace");
+            }
+        }
 
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
@@ -90,13 +98,17 @@ namespace ATM
             if (Storage.Count >= capacity)
                 throw new Exception("Банкомат полон!");
 
-            if (Storage.ContainsKey(value))
-                Storage[value] += count;
-            else
-                Storage.Add(value,count);
+            if (count > 0)
+            {
+                if (Storage.ContainsKey(value))
+                    Storage[value] += count;
+                else
+                    Storage.Add(value, count);
 
-            countOfBanknotes += count;
-            amountOfBanknotes += count * value;
+                CountOfBanknotes += count;
+                AmountOfBanknotes += count * value;
+                RemainingSpace = capacity - countOfBanknotes;
+            }
         }
 
         public bool PickUpMoney(int value, int count = 1)
@@ -105,16 +117,19 @@ namespace ATM
                 return false;
             if(Storage.Count == 0)
                 throw new Exception("Банкомат пуст!");
-
-            if (Storage.ContainsKey(value))
+            if (count > 0)
             {
-                if (Storage[value] >= count)
+                if (Storage.ContainsKey(value))
                 {
-                    Storage[value] -= count;
-                    countOfBanknotes -= count;
-                    amountOfBanknotes -= count * value;
-                    return true;
-                }          
+                    if (Storage[value] >= count)
+                    {
+                        Storage[value] -= count;
+                        CountOfBanknotes -= count;
+                        AmountOfBanknotes -= count * value;
+                        RemainingSpace = capacity - countOfBanknotes;
+                        return true;
+                    }
+                }
             }
  
             throw new Exception("Банкомат не может выдать данную сумму!");
@@ -134,6 +149,8 @@ namespace ATM
         public void PickUpMoney(int amountToIssue, out Dictionary<int, int> solution)
         {
             int[,] decisionMatrix;
+            if (amountToIssue % minNominal > 0)
+                throw new Exception("Введенная сумма для выдачи должна быть кратна: " + minNominal + "!");
             ProcessingPickUp(amountToIssue, out decisionMatrix);
             SearchSolution(decisionMatrix, amountToIssue, out solution);
             IssuanceProcess(solution);
@@ -160,7 +177,8 @@ namespace ATM
                         if (quantityForIssue > 0 && Storage[denominations[i]] >= quantityForIssue)
                             decisionMatrix[i, j] = quantityForIssue;
                         else
-                            decisionMatrix[i, j] = decisionMatrix[i, j - 1];
+                            decisionMatrix[i, j] = (j - 1 > 0) ? decisionMatrix[i, j - 1] : (-1);
+
                     }
                     else
                     {

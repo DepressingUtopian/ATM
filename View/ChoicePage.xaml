@@ -5,15 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ATM.View"
       mc:Ignorable="d" 
-      d:DesignHeight="80" d:DesignWidth="200"
-      Title="ChoicePage">
-
-    <Grid>
+      Height="120" 
+      Width="400"
+      Title="ChoicePage"
+      ShowsNavigationUI="False"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center">
+    <Page.Resources>
+        <ResourceDictionary Source="../StylesDictionary.xaml"/>
+    </Page.Resources>
+    <Grid VerticalAlignment="Top">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Content="Снять деньги" Command="{Binding GetMoneyOpenPageCommand}" Grid.Row="0" Margin="5"/>
-        <Button Content="Внести деньги" Command="{Binding AddMoneyOpenPageCommand}"  Grid.Row="1"  Margin="5"/>
+        <Button Content="Снять деньги" Command="{Binding GetMoneyOpenPageCommand}" Grid.Row="0" Margin="5" Style="{StaticResource MenuButton}"/>
+        <Button Content="Внести деньги" Command="{Binding AddMoneyOpenPageCommand}"  Grid.Row="1"  Margin="5" Style="{StaticResource MenuButton}"/>
     </Grid>
 </Page>

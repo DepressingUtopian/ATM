@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ATM.ViewModel
@@ -39,6 +40,7 @@ namespace ATM.ViewModel
         {
             get { return core.CountOfBanknotes; }
         }
+
         public int ATM_CoreCapacity
         {
             get { return core.Capacity; }
@@ -54,6 +56,16 @@ namespace ATM.ViewModel
             {
                 core.AmountOfBanknotes = value;
                 OnPropertyChanged("ATM_CoreAmountOfBanknotes");
+            }
+        }
+
+        public int RemainingSpace
+        {
+            get { return core.RemainingSpace; }
+            set 
+            {
+                core.RemainingSpace = value;
+                OnPropertyChanged("RemainingSpace");
             }
         }
 
@@ -86,6 +98,7 @@ namespace ATM.ViewModel
             choiceView = pageFactory.ChoicePage();
             pickUpMoneyPage = pageFactory.PickUpMoneyPage();
             currentPage = choiceView;
+            this.RemainingSpace = core.Capacity - core.CountOfBanknotes;
         }
 
         public void SetAddMoneyViewCurrent()
@@ -113,19 +126,27 @@ namespace ATM.ViewModel
         {
             core.AddMoney(nominal, count);
             OnPropertyChanged("ATM_CoreAmountOfBanknotes");
+            OnPropertyChanged("RemainingSpace");
             OnPropertyChanged("Storage");
         }
 
         public void PickUpBanknotes(int amount, bool showDialog = false)
         {
-            if (showDialog)
+            try
             {
-                Dictionary<int, int> solution;
-                core.PickUpMoney(amount,out solution);
-                lastSolution = solution;
+                if (showDialog)
+                {
+                    Dictionary<int, int> solution;
+                    core.PickUpMoney(amount, out solution);
+                    lastSolution = solution;
+                }
+                else
+                    core.PickUpMoney(amount);
             }
-            else
-                core.PickUpMoney(amount);
+            catch (Exception msg)
+            {
+                MessageBox.Show(msg.Message);
+            }
 
             OnPropertyChanged("ATM_CoreAmountOfBanknotes");
             OnPropertyChanged("CountOfBanknotes");

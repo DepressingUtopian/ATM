@@ -82,6 +82,10 @@
     <Compile Include="View\PickUpMoneyPage.xaml.cs">
       <DependentUpon>PickUpMoneyPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="StylesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddMoneyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

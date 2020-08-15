@@ -5,16 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ATM.View"
       mc:Ignorable="d" 
-      d:DesignHeight="120" d:DesignWidth="400"
-      Title="AddMoneyPage">
+      d:DesignHeight="120" d:DesignWidth="440"
+      Title="AddMoneyPage"
+      ShowsNavigationUI="False">
 
+    <Page.Resources>
+        <ResourceDictionary Source="../StylesDictionary.xaml"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="80" Stroke="Black" VerticalAlignment="Top" Width="400"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="80" Stroke="Black" VerticalAlignment="Top" Width="440"/>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -46,27 +50,27 @@
             <TextBlock Grid.Row="1" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding AddBanknotes[2000], Mode=TwoWay}"/>
             <TextBlock Grid.Row="1" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding AddBanknotes[5000], Mode=TwoWay}"/>
 
-            <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="10" Height="20" Width="20"/>
-            <Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="50" Height="20" Width="20"/>
-            <Button Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="100" Height="20" Width="20"/>
-            <Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="200" Height="20" Width="20"/>
-            <Button Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="500" Height="20" Width="20"/>
-            <Button Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="1000" Height="20" Width="20"/>
-            <Button Grid.Row="0" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="2000" Height="20" Width="20"/>
-            <Button Grid.Row="0" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="5000" Height="20" Width="20"/>
+            <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"  Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="10" Height="20" Width="20" Style="{StaticResource PositiveButton}"/>
+            <Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="50" Height="20" Width="20" Style="{StaticResource PositiveButton}"/>
+            <Button Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="100" Height="20" Width="20" Style="{StaticResource PositiveButton}"/>
+            <Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="200" Height="20" Width="20" Style="{StaticResource PositiveButton}"/>
+            <Button Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="500" Height="20" Width="20" Style="{StaticResource PositiveButton}"/>
+            <Button Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="1000" Height="20" Width="20" Style="{StaticResource PositiveButton}"/>
+            <Button Grid.Row="0" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="2000" Height="20" Width="20" Style="{StaticResource PositiveButton}"/>
+            <Button Grid.Row="0" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Content="+" Command="{Binding AddMoneyCommand}" CommandParameter="5000" Height="20" Width="20" Style="{StaticResource PositiveButton}"/>
 
-            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="10" Height="20" Width="20"/>
-            <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="50" Height="20" Width="20"/>
-            <Button Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="100" Height="20" Width="20"/>
-            <Button Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="200" Height="20" Width="20"/>
-            <Button Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="500" Height="20" Width="20"/>
-            <Button Grid.Row="2" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="1000" Height="20" Width="20"/>
-            <Button Grid.Row="2" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="2000" Height="20" Width="20"/>
-            <Button Grid.Row="2" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="5000" Height="20" Width="20"/>
+            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="10" Height="20" Width="20" Style="{StaticResource NegativeButton}"/>
+            <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="50" Height="20" Width="20" Style="{StaticResource NegativeButton}"/>
+            <Button Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="100" Height="20" Width="20" Style="{StaticResource NegativeButton}"/>
+            <Button Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="200" Height="20" Width="20" Style="{StaticResource NegativeButton}"/>
+            <Button Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="500" Height="20" Width="20" Style="{StaticResource NegativeButton}"/>
+            <Button Grid.Row="2" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="1000" Height="20" Width="20" Style="{StaticResource NegativeButton}"/>
+            <Button Grid.Row="2" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="2000" Height="20" Width="20" Style="{StaticResource NegativeButton}"/>
+            <Button Grid.Row="2" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" Content="-" Command="{Binding PickModeyCommand}" CommandParameter="5000" Height="20" Width="20" Style="{StaticResource NegativeButton}"/>
         </Grid>
         <TextBox Grid.Row="1" Text="{Binding SumBanknotesValue}" FontSize="30" 
-                 HorizontalAlignment="Center" Width="160" HorizontalContentAlignment="Center"/>
-        <Button Grid.Row="1" Command="{Binding GoChoicePage}" Content="Назад" HorizontalAlignment="Left" Width="100"/>
-        <Button Grid.Row="1" Command="{Binding GoMoneyToATMCommand}" Content="Внести" HorizontalAlignment="Right" Width="100"/>
+                 HorizontalAlignment="Center" Width="200" HorizontalContentAlignment="Center"/>
+        <Button Grid.Row="1" Command="{Binding GoChoicePage}" Content="Назад" HorizontalAlignment="Left" Width="100" Style="{StaticResource NegativeButton}"/>
+        <Button Grid.Row="1" Command="{Binding GoMoneyToATMCommand}" Content="Внести" HorizontalAlignment="Right" Width="100"  Style="{StaticResource PositiveButton}"/>
     </Grid>
 </Page>
