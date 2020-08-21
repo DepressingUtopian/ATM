@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -174,23 +175,50 @@ namespace ATM
                     if (local_sum <= amountToIssue && local_sum >= denominations[i])
                     {
                         int quantityForIssue = (int)(local_sum / denominations[i]);
-                        if (quantityForIssue > 0 && Storage[denominations[i]] >= quantityForIssue)
-                            decisionMatrix[i, j] = quantityForIssue;
+                        
+
+                        if (i - 1 >= 0)
+                        {
+                            if (quantityForIssue > atm_storage[denominations[i]])
+                                quantityForIssue = atm_storage[denominations[i]];
+                            
+                            int idx = ((local_sum - denominations[i] * quantityForIssue) / minNominal) - 1;
+                            int quantityForIssue2 =  (idx >= 0 && decisionMatrix[i - 1, idx] > 0) ? decisionMatrix[i - 1, idx] + quantityForIssue : 0;
+                            int quantityForIssue3 = decisionMatrix[i - 1, j];
+                            if (local_sum - denominations[i] * quantityForIssue != 0)
+                                quantityForIssue = 0;
+                            decisionMatrix[i, j] = MinNoZero(quantityForIssue, quantityForIssue2, quantityForIssue3);
+                        }
                         else
-                            decisionMatrix[i, j] = (j - 1 > 0) ? decisionMatrix[i, j - 1] : (-1);
+                        {
+                            if (quantityForIssue > atm_storage[denominations[i]])
+                                quantityForIssue = 0;
+                            decisionMatrix[i, j] = quantityForIssue;
+                        }
+                        
 
                     }
                     else
                     {
-                        if (j - 1 > 0)
-                            decisionMatrix[i, j] = decisionMatrix[i, j - 1];
+                        if (i == 0)
+                            decisionMatrix[i, j] = 0;
                         else
-                            decisionMatrix[i, j] = -1;
+                            decisionMatrix[i, j] = decisionMatrix[i - 1, j];
                     }
 
                     local_sum += minNominal;
                 }            
             }  
+        }
+
+        public int MinNoZero(params int[] values)
+        {
+            int minValue = int.MaxValue;
+            for (int i = 0; i < values.Length; i++)
+                if (minValue > values[i] && values[i] != 0)
+                    minValue = values[i];
+
+            return (minValue == int.MaxValue) ? 0 : minValue;
         }
 
         public bool SearchSolution(int[,] decisionMatrix, int amountToIssue,out Dictionary<int,int> solution)
@@ -200,6 +228,7 @@ namespace ATM
             List<int> passedDenominationsIdx = new List<int>();
             List<int> denominations = Storage.Keys.ToList<int>();
             solution = new Dictionary<int, int>();
+            int i_size = decisionMatrix.GetLength(0);
             while (amountToIssue > 0)
             {
                 if (passedDenominationsIdx.Count == k)
@@ -208,29 +237,41 @@ namespace ATM
                     return false;
 
                 idx = (int)(amountToIssue / minNominal) - 1;
-                int minCountIdx = 0;
-                int minElem = Int32.MaxValue;
-                for (int i = 1; i < k; i++)
+
+                int resultIdx = 0;
+
+                for (int i = i_size - 1; i > 0; i--)
                 {
                     if (passedDenominationsIdx.Contains(i))
                         continue;
-                    
-                    if (minElem > decisionMatrix[i, idx] && decisionMatrix[i, idx] != -1)
+                    Debug.WriteLine(decisionMatrix[i, idx]);
+                    if (decisionMatrix[i, idx] == decisionMatrix[i - 1, idx])
+                        continue;
+                    else
                     {
-                        minElem = decisionMatrix[i, idx];
-                        minCountIdx = i;
+                        
+                        Debug.WriteLine(decisionMatrix[i - 1, idx]);
+                        resultIdx = i;
+                        break;
                     }
                 }
-                if (decisionMatrix[minCountIdx, idx] == -1)
+                if (decisionMatrix[resultIdx, idx] == 0)
                     return false;
                 else
                 {
-                    amountToIssue -= decisionMatrix[minCountIdx, idx] * denominations[minCountIdx];              
-                    AddSolution(ref solution, denominations[minCountIdx], decisionMatrix[minCountIdx, idx]);
+                    int maxCount = (int) (amountToIssue / denominations[resultIdx]);
+                    if(maxCount > decisionMatrix[resultIdx, idx])
+                        maxCount = decisionMatrix[resultIdx, idx];
+                    if (maxCount > Storage[denominations[resultIdx]])
+                        maxCount = Storage[denominations[resultIdx]];
+
+
+                    amountToIssue -= maxCount * denominations[resultIdx];              
+                    AddSolution(ref solution, denominations[resultIdx], maxCount);
 
                 }
 
-                passedDenominationsIdx.Add(minCountIdx);
+                passedDenominationsIdx.Add(resultIdx);
             }
 
             return true;

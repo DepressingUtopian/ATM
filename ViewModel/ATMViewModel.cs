@@ -132,8 +132,8 @@ namespace ATM.ViewModel
 
         public void PickUpBanknotes(int amount, bool showDialog = false)
         {
-            try
-            {
+           try
+           {
                 if (showDialog)
                 {
                     Dictionary<int, int> solution;
@@ -145,7 +145,7 @@ namespace ATM.ViewModel
             }
             catch (Exception msg)
             {
-                MessageBox.Show(msg.Message);
+               MessageBox.Show(msg.Message);
             }
 
             OnPropertyChanged("ATM_CoreAmountOfBanknotes");
